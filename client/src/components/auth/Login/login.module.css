@@ -1,0 +1,39 @@
+.title {
+    color: #750816;
+    text-align: center;
+}
+
+.form {
+    width: 385px;
+    padding: 3rem 1.5rem;
+    background: #ffffff4d;
+    border-radius: 10px;
+    margin: 8% auto;
+}
+
+.input {
+    width: 98%;
+    padding: 10px 5px;
+    font-size: 15px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px #000;
+    margin: 5px 0;
+}
+
+.submit {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    background-color: #e01e37;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+}
+
+@media (max-width: 400px) {
+    .form {
+        width: 275px;
+    }
+}

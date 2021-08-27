@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import reducer from 'reducers/combineReducer';
+import reducer from 'reducers/combineReducers';
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo'))
