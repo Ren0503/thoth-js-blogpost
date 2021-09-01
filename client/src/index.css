@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+@import '~react-bootstrap/dist/bootstrap.css';
 
 body {
   margin: 0;

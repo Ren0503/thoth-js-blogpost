@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getUserDetail, updateUserProfile } from 'actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Typography, Form, Input, Button } from 'antd';
+import {  Form, Button, Row, Col } from 'react-bootstrap';
 import { Message, Loading } from 'components/shared';
-import MainLayout from 'layouts/MainLayout';
 import { USER_UPDATE_PROFILE_RESET } from 'constants/userConstants';
+import MainLayout from 'layouts/MainLayout';
 
 const ProfileScreen = ({ location, history }) => {
     const [name, setName] = useState('');
@@ -13,6 +13,7 @@ const ProfileScreen = ({ location, history }) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState(null);
     const [avatar, setAvatar] = useState('');
+    const [uploading, setUploading] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -40,6 +41,29 @@ const ProfileScreen = ({ location, history }) => {
         }
     }, [dispatch, history, userInfo, user, success]);
 
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        setUploading(true);
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            };
+
+            const { data } = await axios.post('/api/upload', formData, config);
+
+            setAvatar(data);
+            setUploading(false);
+        } catch(error) {
+            console.error(error);
+            setUploading(false);
+        }
+    };
+
     const submitHandler = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -52,8 +76,8 @@ const ProfileScreen = ({ location, history }) => {
     return (
         <MainLayout>
             <Row>
-                <Col span={18} push={6}>
-                    <Typography>User Profile</Typography>
+                <Col md={3}>
+                    <h2>User Profile</h2>
                     {message && <Message variant='danger'>{message}</Message>}
                     { }
                     {success && <Message variant='success'>Profile Updated</Message>}
@@ -62,68 +86,71 @@ const ProfileScreen = ({ location, history }) => {
                     ) : error ? (
                         <Message variant='danger'>{error}</Message>
                     ) : (
-                        <Form
-                            name="basic"
-                            labelCol={{ span: 8 }}
-                            wrapperCol={{ span: 16 }}
-                            initialValues={{ remember: true }}
-                            onFinish={submitHandler}
-                        >
-                            <Form.Item
-                                label="Username"
-                                name="username"
-                                rules={[{ required: true, message: 'Please input your username!' }]}
-                            >
-                                <Input
-                                    type='text'
+                        <Form onSubmit={submitHandler}>
+                            <Form.Group controlId='name'>
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control
+                                    type='name'
+                                    placeholder='Enter name'
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                />
-                            </Form.Item>
+                                ></Form.Control>
+                            </Form.Group>
 
-                            <Form.Item
-                                label="Email"
-                                name="email"
-                                rules={[{ required: true, message: 'Please input your email!' }]}
-                            >
-                                <Input
+                            <Form.Group controlId='email'>
+                                <Form.Label>Email Address</Form.Label>
+                                <Form.Control
                                     type='email'
+                                    placeholder='Enter email'
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </Form.Item>
+                                ></Form.Control>
+                            </Form.Group>
 
-                            <Form.Item
-                                label="Password"
-                                name="password"
-                                rules={[{ required: true, message: 'Please input your password!' }]}
-                            >
-                                <Input.Password
+                            <Form.Group controlId='avatar'>
+                                <Form.Label>Avatar</Form.Label>
+                                <Form.Control
+                                    type='text'
+                                    placeholder='Enter image url'
+                                    value={avatar}
+                                    onChange={(e) => setAvatar(e.target.value)}
+                                ></Form.Control>
+                                <Form.File
+                                    id='image-file'
+                                    label='Choose File'
+                                    custom
+                                    onChange={uploadFileHandler}
+                                ></Form.File>
+                                {uploading && <Loader />}
+                            </Form.Group>
+
+                            <Form.Group controlId='password'>
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control
                                     type='password'
+                                    placeholder='Enter password'
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </Form.Item>
+                                ></Form.Control>
+                            </Form.Group>
 
-                            <Form.Item
-                                label="Confirm Password"
-                                name="confirmPassword"
-                                rules={[{ required: true, message: 'Please input your password again!' }]}
-                            >
-                                <Input.Password
+                            <Form.Group controlId='confirmPassword'>
+                                <Form.Label>Confirm Password</Form.Label>
+                                <Form.Control
                                     type='password'
+                                    placeholder='Confirm password'
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                />
-                            </Form.Item>
+                                ></Form.Control>
+                            </Form.Group>
 
-                            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                                <Button type="primary" htmlType="submit">
-                                    Submit
-                                </Button>
-                            </Form.Item>
+                            <Button type='submit' variant='primary'>
+                                Update
+                            </Button>
                         </Form>
                     )}
+                </Col>
+                <Col md={9}>
                 </Col>
             </Row>
         </MainLayout>

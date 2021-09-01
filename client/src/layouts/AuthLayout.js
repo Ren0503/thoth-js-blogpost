@@ -1,17 +1,17 @@
-import { Col, Row, Image } from 'antd';
 import React from 'react';
+import { Col, Row, Image } from 'react-bootstrap';
 import background from 'assets/background.jpg';
 
 const AuthLayout = ({ children }) => {
     return (
         <div>
             <Row>
-                <Col span={12}>
+                <Col md={6}>
                     <Image 
                         src={background}
                     />
                 </Col>
-                <Col span={12}>
+                <Col md={6}>
                     {children}
                 </Col>
             </Row>

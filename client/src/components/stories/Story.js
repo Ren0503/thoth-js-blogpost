@@ -1,17 +1,19 @@
 import React from 'react';
-import { Card } from 'antd';
-
-const { Meta } = Card;
+import { Card } from 'react-bootstrap';
 
 const Story = ({ story }) => {
     return (
         <div>
-            <Card
-                hoverable
-                style={{ width: 240 }}
-                cover={<img alt="Image" src={story.image} />}
-            >
-                <Meta title={story.title} description={story.description} />
+            <Card>
+                <Card.Img src={story.image} />
+
+                <Card.Body>
+                    <Link to={`/book/${story._id}`}>
+                        <Card.Title as='h5' className="title">
+                            <strong>{story.title}</strong>
+                        </Card.Title>
+                    </Link>
+                </Card.Body>
             </Card>
         </div>
     );

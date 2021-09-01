@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input, Typography, Checkbox, Button } from 'antd';
-import Loading from 'components/shared/Loading';
-import Message from 'components/shared/Message';
-import AuthLayout from 'layouts/AuthLayout';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Message, Loading } from 'components/shared';
 import { login } from 'actions/userActions';
+import AuthLayout from 'layouts/AuthLayout';
 
 const LoginScreen = ({ location, history }) => {
     const [email, setEmail] = useState('');
@@ -27,81 +26,47 @@ const LoginScreen = ({ location, history }) => {
         dispatch(login(email, password));
     };
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
     return (
         <AuthLayout>
-            <Typography>Login</Typography>
-            {error && <Message type="danger" >{error}</Message>}
+            <h1>Sign In</h1>
+            {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loading />}
-            <Form
-                name="basic"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                initialValues={{ remember: true }}
-                onFinish={submitHandler}
-                onFinishFailed={onFinishFailed}
-            >
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your email!',
-                        },
-                    ]}
-                >
-                    <Input
+            <Form onSubmit={submitHandler}>
+                <Form.Group controlId='email'>
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
                         type='email'
+                        placeholder='Enter email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Item>
+                    ></Form.Control>
+                </Form.Group>
 
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                >
-                    <Input.Password
+                <Form.Group controlId='password'>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
                         type='password'
+                        placeholder='Enter password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Item>
+                    ></Form.Control>
+                </Form.Group>
 
-                <Form.Item
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item>
+                <Button type='py-3' variant='primary'>
+                    Sign In
+                </Button>
 
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
+                <Row className='py-3'>
+                    <Col>
+                        New Customer ? {' '}
+                        <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+                            Register
+                        </Link>
+                    </Col>
+                </Row>
             </Form>
         </AuthLayout>
-    )
-}
+    );
+};
 
-export default LoginScreen
+export default LoginScreen;

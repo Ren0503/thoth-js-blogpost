@@ -1,14 +1,21 @@
 import React from 'react';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+import { Spinner } from 'react-bootstrap';
 
 const Loading = () => {
     return (
-        <div>
-            <Spin indicator={antIcon} size="large" />
-        </div>
+        <Spinner
+            variant="info"
+            animation='border'
+            role='status'
+            style={{
+                width: '100px',
+                height: '100px',
+                margin: 'auto',
+                display: 'block',
+            }}
+        >
+            <span className='sr-only'>Loading...</span>
+        </Spinner>
     );
 };
 

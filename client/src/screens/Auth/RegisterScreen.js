@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input, Typography, Checkbox, Button } from 'antd';
-import Loading from 'components/shared/Loading';
-import Message from 'components/shared/Message';
-import AuthLayout from 'layouts/AuthLayout';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Message, Loading } from 'components/shared';
 import { register } from 'actions/userActions';
+import AuthLayout from 'layouts/AuthLayout';
 
 const RegisterScreen = ({ location, history }) => {
     const [name, setName] = useState('');
@@ -35,86 +34,66 @@ const RegisterScreen = ({ location, history }) => {
         }
     };
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
     return (
         <AuthLayout>
-            <Typography>Login</Typography>
-            {message && <Message type="danger" >{error}</Message>}
-            {error && <Message type="danger" >{error}</Message>}
+            <h1>Sign Up</h1>
+            {message && <Message variant='danger'>{message}</Message>}
+            {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loading />}
-            <Form
-                name="basic"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                initialValues={{ remember: true }}
-                onFinish={submitHandler}
-                onFinishFailed={onFinishFailed}
-            >
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
-                >
-                    <Input
+            <Form onSubmit={submitHandler}>
+                <Form.Group controlId='name'>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
                         type='name'
+                        placeholder='Enter name'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                    />
-                </Form.Item>
+                    ></Form.Control>
+                </Form.Group>
 
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{ required: true, message: 'Please input your email!' }]}
-                >
-                    <Input
+                <Form.Group controlId='email'>
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
                         type='email'
+                        placeholder='Enter email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Item>
+                    ></Form.Control>
+                </Form.Group>
 
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                    <Input.Password
+                <Form.Group controlId='password'>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
                         type='password'
+                        placeholder='Enter password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Item>
+                    ></Form.Control>
+                </Form.Group>
 
-                <Form.Item
-                    label="Confirm Password"
-                    name="confirmPassword"
-                    rules={[{ required: true, message: 'Please input your password again!' }]}
-                >
-                    <Input.Password
+                <Form.Group controlId='name'>
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
                         type='password'
+                        placeholder='Confirm password'
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </Form.Item>
+                    ></Form.Control>
+                </Form.Group>
 
-                <Form.Item
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{ offset: 8, span: 16 }}
-                >
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item>
-
-                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
+                <Button type='submit' variant='primary'>
+                    Register
+                </Button>
             </Form>
+
+            <Row className='py-3'>
+                <Col>
+                    Have an account?{' '}
+                    <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+                        Login
+                    </Link>
+                </Col>
+            </Row>
         </AuthLayout>
     );
 };

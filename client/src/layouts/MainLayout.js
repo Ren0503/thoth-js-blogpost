@@ -1,24 +1,17 @@
-import { Breadcrumb, Layout } from 'antd';
 import React from 'react';
-import Footer from '../components/core/Footer';
-import Header from '../components/core/Header';
+import { Footer, Header } from 'components/core';
+import { Container } from 'react-bootstrap';
 
-const { Content } = Layout;
 
 const MainLayout = ({ children }) => {
     return (
-        <Layout>
+        <div>
             <Header />
-            <Content style={{ padding: '0 50px' }}>
-                <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
-                <div className="site-layout-content">{children}</div>
-            </Content>
+            <Container>
+                <div className="py-3">{children}</div>
+            </Container>
             <Footer />
-        </Layout>
+        </div>
     )
 }
 

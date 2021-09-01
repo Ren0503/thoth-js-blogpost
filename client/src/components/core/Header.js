@@ -1,17 +1,9 @@
 import React from 'react';
-import { Image, Menu } from 'antd';
-import {
-    EyeTwoTone,
-    HomeTwoTone,
-    LoginOutlined,
-    UserAddOutlined
-} from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'actions/userActions';
 import logo from 'assets/logo.png';
-import Avatar from 'antd/lib/avatar/avatar';
-
-const { SubMenu } = Menu;
+import { Container, Image, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -25,38 +17,47 @@ const Header = () => {
 
     return (
         <div>
-            <Menu theme="dark" mode="horizontal">
-                <Menu.Item key="home" icon={<HomeTwoTone />}>
-                    Home
-                </Menu.Item>
-                <Menu.Item key="public" icon={<EyeTwoTone />}>
-                    Public
-                </Menu.Item>
-                {userInfo ? (
-                    <>
-                        <Avatar src={userInfo.avatar} size={40} />
-                        <SubMenu key="SubMenu" title={userInfo.name}>
-                            <Menu.Item key="profile">Profile</Menu.Item>
-                            <Menu.Item key="logout" onClick={logoutHandler}>
-                                Logout
-                            </Menu.Item>
-                        </SubMenu>
-                    </>
-                ) : (
-                    <>
-                        <Menu.Item key="login" icon={<LoginOutlined />}>
-                            <a href="/login">
-                                Login
-                            </a>
-                        </Menu.Item>
-                        <Menu.Item key="register" icon={<UserAddOutlined />}>
-                            <a href="/register">
-                                Register
-                            </a>
-                        </Menu.Item>
-                    </>
-                )}
-            </Menu>
+            <Navbar variant='dark' className='text-light' expand='lg' collapseOnSelect sticky="top">
+                <Container>
+                    <Link to='/'>
+                        <Navbar.Brand>
+                            <Image src={logo} alt="Logo" width="80" className="avatar" />
+                        </Navbar.Brand>
+                    </Link>
+                    <Navbar.Toggle aria-controls='navbarScroll' />
+                    <Navbar.Collapse id='navbarScroll'>
+                        <Nav className='ml-auto' navbarScroll>
+                            <Nav.Link href="/about">About</Nav.Link>
+                            <Nav.Link href="/contact">Contact</Nav.Link>
+                            <Link to='/cart'>
+                                <Nav.Link>
+                                    <i className='fas fa-shopping-cart'></i> Cart
+                                </Nav.Link>
+                            </Link>
+                            {userInfo ? (
+                                <>
+                                    <Image src={userInfo.avatar} width="40" height="40" roundedCircle />
+                                    <NavDropdown title={userInfo.name} id='username'>
+
+                                        <LinkContainer to='/profile'>
+                                            <NavDropdown.Item>Profile</NavDropdown.Item>
+                                        </LinkContainer>
+                                        <NavDropdown.Item onClick={logoutHandler}>
+                                            Logout
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                </>
+                            ) : (
+                                <Link to='/login'>
+                                    <Nav.Link>
+                                        <i className='fas fa-user'></i> Sign In
+                                    </Nav.Link>
+                                </Link>
+                            )}
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         </div>
     )
 }
