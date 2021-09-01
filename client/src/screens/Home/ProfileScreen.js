@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { getUserDetail, updateUserProfile } from 'actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 import {  Form, Button, Row, Col } from 'react-bootstrap';
@@ -43,20 +44,20 @@ const ProfileScreen = ({ location, history }) => {
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0];
+
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append("file", file);
+        formData.append("upload_preset", "blog_post");
+        formData.append("cloud_name", "dsvc4kfvh");
         setUploading(true);
 
         try {
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-            };
+            const { data } = await axios.post(
+                `${process.env.REACT_APP_CLOUDINARY_ENDPOINT}/upload`,
+                formData,
+            );
 
-            const { data } = await axios.post('/api/upload', formData, config);
-
-            setAvatar(data);
+            setAvatar(data.secure_url);
             setUploading(false);
         } catch(error) {
             console.error(error);
@@ -121,7 +122,7 @@ const ProfileScreen = ({ location, history }) => {
                                     custom
                                     onChange={uploadFileHandler}
                                 ></Form.File>
-                                {uploading && <Loader />}
+                                {uploading && <Loading />}
                             </Form.Group>
 
                             <Form.Group controlId='password'>

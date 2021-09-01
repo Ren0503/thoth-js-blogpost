@@ -16,6 +16,8 @@ import {
     storyCreateReducer,
     storyUpdateReducer,
     storyDeleteReducer,
+    storyListMyReducer,
+    storyCommentCreateReducer,
 } from 'reducers/storyReducers';
 
 const reducer = combineReducers({
@@ -24,6 +26,8 @@ const reducer = combineReducers({
     storyCreate: storyCreateReducer,
     storyUpdate: storyUpdateReducer,
     storyDelete: storyDeleteReducer,
+    storyListMy: storyListMyReducer,
+    storyCommentCreate: storyCommentCreateReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
     userDetail: userDetailReducer,

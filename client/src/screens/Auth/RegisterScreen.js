@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { Message, Loading } from 'components/shared';
 import { register } from 'actions/userActions';
+import { Link } from 'react-router-dom';
+
 import AuthLayout from 'layouts/AuthLayout';
 
 const RegisterScreen = ({ location, history }) => {

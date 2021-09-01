@@ -7,12 +7,12 @@ const AuthLayout = ({ children }) => {
         <div>
             <Row>
                 <Col md={6}>
-                    <Image 
-                        src={background}
-                    />
+                    <Image src={background} fluid/>
                 </Col>
                 <Col md={6}>
-                    {children}
+                    <div className="p-5">
+                        {children}
+                    </div>
                 </Col>
             </Row>
         </div>

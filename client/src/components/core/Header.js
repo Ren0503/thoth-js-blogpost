@@ -17,7 +17,7 @@ const Header = () => {
 
     return (
         <div>
-            <Navbar variant='dark' className='text-light' expand='lg' collapseOnSelect sticky="top">
+            <Navbar className='' expand='lg' collapseOnSelect sticky="top">
                 <Container>
                     <Link to='/'>
                         <Navbar.Brand>
@@ -29,19 +29,13 @@ const Header = () => {
                         <Nav className='ml-auto' navbarScroll>
                             <Nav.Link href="/about">About</Nav.Link>
                             <Nav.Link href="/contact">Contact</Nav.Link>
-                            <Link to='/cart'>
-                                <Nav.Link>
-                                    <i className='fas fa-shopping-cart'></i> Cart
-                                </Nav.Link>
-                            </Link>
                             {userInfo ? (
                                 <>
                                     <Image src={userInfo.avatar} width="40" height="40" roundedCircle />
                                     <NavDropdown title={userInfo.name} id='username'>
-
-                                        <LinkContainer to='/profile'>
+                                        <Link to='/profile'>
                                             <NavDropdown.Item>Profile</NavDropdown.Item>
-                                        </LinkContainer>
+                                        </Link>
                                         <NavDropdown.Item onClick={logoutHandler}>
                                             Logout
                                         </NavDropdown.Item>

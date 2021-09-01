@@ -71,3 +71,41 @@ export const storyUpdateReducer = (state = { story: {} }, action) => {
             return state;
     };
 };
+
+export const storyListMyReducer = (state = { stories: [] }, action) => {
+    switch (action.type) {
+        case types.STORY_LIST_MY_REQUEST:
+            return {
+                loading: true,
+            }
+        case types.STORY_LIST_MY_SUCCESS:
+            return {
+                loading: true,
+                stories: action.payload,
+            }
+        case types.STORY_LIST_MY_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            }
+        case types.STORY_LIST_MY_RESET:
+            return { stories: [] }
+        default:
+            return state;
+    }
+};
+
+export const storyCommentCreateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case types.STORY_CREATE_COMMENT_REQUEST:
+            return { loading: true };
+        case types.STORY_CREATE_COMMENT_SUCCESS:
+            return { loading: false, success: true };
+        case types.STORY_CREATE_COMMENT_FAIL:
+            return { loading: false, error: action.payload };
+        case types.STORY_CREATE_COMMENT_RESET:
+            return {};
+        default:
+            return state;
+    }
+}

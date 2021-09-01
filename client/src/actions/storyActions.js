@@ -159,3 +159,76 @@ export const deleteStory = (id) => async (dispatch, getState) => {
         });
     };
 };
+
+export const myStories = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: types.STORY_LIST_MY_REQUEST,
+        });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+
+        const { data } = await axios.get(`/api/stories/my_stories`, config);
+
+        dispatch({
+            type: types.STORY_LIST_MY_SUCCESS,
+            payload: data,
+        });
+    } catch (err) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
+        dispatch({
+            type: types.STORY_LIST_MY_FAIL,
+            payload: message,
+        });
+    }
+};
+
+export const createStoryComment = (storyId, comment) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: types.STORY_CREATE_COMMENT_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            },
+        };
+
+        await axios.post(`/api/stories/${storyId}/comments`, comment, config);
+
+        dispatch({
+            type: types.STORY_CREATE_COMMENT_SUCCESS
+        });
+    } catch (err) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout());
+        }
+        dispatch({
+            type: types.STORY_CREATE_COMMENT_FAIL,
+            payload: message,
+        });
+    }
+};
