@@ -8,7 +8,7 @@ router
     .get(StoryCtrl.getAllStories)
     .post(protect, StoryCtrl.createStory)
 
-router.get('/my_stories', StoryCtrl.getMyStories)
+router.get('/my_stories', protect, StoryCtrl.getMyStories)
 
 router.get('/user/:userId', StoryCtrl.getStoriesByUser)
 

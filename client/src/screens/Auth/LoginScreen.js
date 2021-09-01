@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Typography } from 'antd';
 import Loading from 'components/shared/Loading';
 import Message from 'components/shared/Message';
+import AuthLayout from 'layouts/AuthLayout';
 
 const LoginScreen = ({ location, history }) => {
     const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const LoginScreen = ({ location, history }) => {
     };
 
     return (
-        <div>
+        <AuthLayout>
             <Typography>Login</Typography>
             {error && <Message type="danger" >{error}</Message>}
             {loading && <Loading />}
@@ -98,8 +99,7 @@ const LoginScreen = ({ location, history }) => {
                     </Button>
                 </Form.Item>
             </Form>
-
-        </div>
+        </AuthLayout>
     )
 }
 

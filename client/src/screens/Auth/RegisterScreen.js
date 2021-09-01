@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Typography } from 'antd';
 import Loading from 'components/shared/Loading';
 import Message from 'components/shared/Message';
+import AuthLayout from 'layouts/AuthLayout';
 
 const RegisterScreen = () => {
     const [name, setName] = useState('');
@@ -38,7 +39,7 @@ const RegisterScreen = () => {
     };
 
     return (
-        <div>
+        <AuthLayout>
             <Typography>Login</Typography>
             {message && <Message type="danger" >{error}</Message>}
             {error && <Message type="danger" >{error}</Message>}
@@ -113,7 +114,7 @@ const RegisterScreen = () => {
                     </Button>
                 </Form.Item>
             </Form>
-        </div>
+        </AuthLayout>
     );
 };
 

@@ -64,9 +64,8 @@ exports.updateStory = async (req, res) => {
             res.status(404).json("Story not found");
         }
 
-        if (story.user._id !== req.user._id) {
-            res.status(404).json("Not authorization to access");
-        } else {
+        if (story.user._id === req.user._id) {
+            console.log(req.user.isAdmin);
             const {
                 title,
                 body,
@@ -83,6 +82,8 @@ exports.updateStory = async (req, res) => {
 
             const updatedStory = await story.save();
             res.json(updatedStory);
+        } else {
+            res.status(404).json("Not authorization to access");
         }
     } catch (error) {
         res.status(500).json({ error: "Something went wrong" });
@@ -99,7 +100,7 @@ exports.deleteStory = async (req, res) => {
             res.status(404).json("Story not found");
         }
 
-        if (story.user._id !== req.user._id) {
+        if (story.user._id !== req.user._id && !req.user.isAdmin) {
             res.status(404).json("Not authorization to access");
         } else {
             await Story.remove({ _id: req.params.id });
