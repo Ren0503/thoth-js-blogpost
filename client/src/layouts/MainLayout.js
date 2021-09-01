@@ -5,7 +5,7 @@ import Header from '../components/core/Header';
 
 const { Content } = Layout;
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
     return (
         <Layout>
             <Header />
@@ -15,7 +15,7 @@ const MainLayout = () => {
                     <Breadcrumb.Item>List</Breadcrumb.Item>
                     <Breadcrumb.Item>App</Breadcrumb.Item>
                 </Breadcrumb>
-                <div className="site-layout-content">Content</div>
+                <div className="site-layout-content">{children}</div>
             </Content>
             <Footer />
         </Layout>

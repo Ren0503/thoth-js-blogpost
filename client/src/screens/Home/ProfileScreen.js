@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getUserDetail, updateUserProfile } from 'actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Typography, Form } from 'antd';
-import { Message, Loading } from 'components/shared/Message';
+import { Row, Col, Typography, Form, Input, Button } from 'antd';
+import { Message, Loading } from 'components/shared';
 import MainLayout from 'layouts/MainLayout';
+import { USER_UPDATE_PROFILE_RESET } from 'constants/userConstants';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ location, history }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

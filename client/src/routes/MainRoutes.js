@@ -4,7 +4,7 @@ import { ScrollToTop } from 'components/shared';
 import ProfileScreen from 'screens/Home/ProfileScreen';
 import HomeScreen from 'screens/Home/HomeScreen';
 
-const AuthRoutes = () => {
+const MainRoutes = () => {
     return (
         <ScrollToTop>
             <Switch>
@@ -15,4 +15,4 @@ const AuthRoutes = () => {
     );
 };
 
-export default AuthRoutes;
+export default MainRoutes;

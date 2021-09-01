@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input, Typography } from 'antd';
+import { Form, Input, Typography, Checkbox, Button } from 'antd';
 import Loading from 'components/shared/Loading';
 import Message from 'components/shared/Message';
 import AuthLayout from 'layouts/AuthLayout';
+import { register } from 'actions/userActions';
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ location, history }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

@@ -26,7 +26,6 @@ const Header = () => {
     return (
         <div>
             <Menu theme="dark" mode="horizontal">
-                <Image src={logo} width="80" />
                 <Menu.Item key="home" icon={<HomeTwoTone />}>
                     Home
                 </Menu.Item>
