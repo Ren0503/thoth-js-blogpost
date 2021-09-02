@@ -45,10 +45,8 @@ exports.getStoryById = async (req, res) => {
         if (!story) {
             res.status(404).json("Story not found");
         }
-        if (story.status == 'public')
-            res.json(story);
-        else
-            res.status(404).json("Not authorization to access");
+            
+        res.json(story);
     } catch (error) {
         res.status(500).json({ error: "Something went wrong" });
     }
@@ -58,17 +56,19 @@ exports.getStoryById = async (req, res) => {
 // @route   PUT /api/stories/:id
 exports.updateStory = async (req, res) => {
     try {
-        const story = await Story.findById(req.params.id).populate('user').lean();
+        const story = await Story.findById(req.params.id);
 
         if (!story) {
             res.status(404).json("Story not found");
         }
 
-        if (story.user._id === req.user._id) {
-            console.log(req.user.isAdmin);
+        if (story.user.toString() != req.user._id.toString()) {
+            res.status(404).json("Not authorization to access");
+        } else {
             const {
                 title,
                 body,
+                category,
                 description,
                 image,
                 status,
@@ -76,14 +76,13 @@ exports.updateStory = async (req, res) => {
 
             story.title = title;
             story.description = description;
+            story.category = category;
             story.body = body;
             story.image = image;
             story.status = status;
 
             const updatedStory = await story.save();
             res.json(updatedStory);
-        } else {
-            res.status(404).json("Not authorization to access");
         }
     } catch (error) {
         res.status(500).json({ error: "Something went wrong" });
@@ -94,16 +93,16 @@ exports.updateStory = async (req, res) => {
 // @route   DELETE /api/stories/:id
 exports.deleteStory = async (req, res) => {
     try {
-        const story = await Story.findById(req.params.id).lean();
+        const story = await Story.findById(req.params.id);
 
         if (!story) {
             res.status(404).json("Story not found");
         }
 
-        if (story.user._id !== req.user._id && !req.user.isAdmin) {
+        if (story.user.toString() != req.user._id.toString()) {
             res.status(404).json("Not authorization to access");
         } else {
-            await Story.remove({ _id: req.params.id });
+            await story.remove();
             res.json({ message: 'Story removed' });
         }
     } catch (error) {
@@ -146,7 +145,7 @@ exports.createComment = async (req, res) => {
     try {
         const { body } = req.body;
         const story = await Story.findById(req.params.id);
-    
+
         if (story) {
             const comment = {
                 name: req.user.name,
@@ -154,10 +153,10 @@ exports.createComment = async (req, res) => {
                 body,
                 user: req.user._id,
             };
-    
+
             story.comments.push(comment);
             story.numComments = story.comments.length;
-    
+
             await story.save();
             res.status(201).json({ message: 'Comment added' });
         } else {
