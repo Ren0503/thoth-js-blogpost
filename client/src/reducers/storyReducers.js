@@ -80,7 +80,7 @@ export const storyListMyReducer = (state = { stories: [] }, action) => {
             }
         case types.STORY_LIST_MY_SUCCESS:
             return {
-                loading: true,
+                loading: false,
                 stories: action.payload,
             }
         case types.STORY_LIST_MY_FAIL:

@@ -5,12 +5,12 @@ const Story = require('../models/storyModel');
 exports.createStory = async (req, res) => {
     try {
         const story = new Story({
-            title: req.body.title,
-            description: req.body.description,
-            category: req.body.category,
-            body: req.body.body,
-            image: req.body.image,
-            status: req.body.status,
+            title: "Sample Title",
+            description: "Sample description",
+            category: "Sample category",
+            body: "Sample body",
+            image: "Sample Image",
+            status: "public",
             user: req.user._id,
         });
 

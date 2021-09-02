@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { detailStory, updateStory } from 'actions/storyActions';
-import { Loading } from 'components/shared';
+import { Loading, Message } from 'components/shared';
 import { STORY_UPDATE_RESET } from 'constants/storyConstants';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import MainLayout from 'layouts/MainLayout';
-import Quill from 'react-quill';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const EditScreen = ({ history, match }) => {
     const storyId = match.params.id;
@@ -14,6 +16,7 @@ const EditScreen = ({ history, match }) => {
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
+    const [status, setStatus] = useState('');
     const [body, setBody] = useState('');
     const [uploading, setUploading] = useState(false);
 
@@ -40,6 +43,7 @@ const EditScreen = ({ history, match }) => {
                 setTitle(story.title);
                 setImage(story.image);
                 setCategory(story.category);
+                setStatus(story.status);
                 setDescription(story.description);
                 setBody(story.body);
             }
@@ -83,6 +87,7 @@ const EditScreen = ({ history, match }) => {
             title,
             image,
             category,
+            status,
             description,
             body,
         }));
@@ -94,7 +99,7 @@ const EditScreen = ({ history, match }) => {
             {loadingUpdate && <Loading />}
             {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
             {loading ? (
-                <Loader />
+                <Loading />
             ) : error ? (
                 <Message variant='danger'>{error}</Message>
             ) : (
@@ -109,7 +114,7 @@ const EditScreen = ({ history, match }) => {
                         ></Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId='title'>
+                    <Form.Group controlId='category'>
                         <Form.Label>Category</Form.Label>
                         <Form.Control
                             type='text'
@@ -117,6 +122,18 @@ const EditScreen = ({ history, match }) => {
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
                         ></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId='status'>
+                        <Form.Label>Status</Form.Label>
+                        <Form.Control
+                            as='select'
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                        >
+                            <option value="private">Private</option>
+                            <option value="public">Public</option>
+                        </Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId='category'>
@@ -143,12 +160,13 @@ const EditScreen = ({ history, match }) => {
                             custom
                             onChange={uploadFileHandler}
                         ></Form.File>
-                        {uploading && <Loader />}
+                        {uploading && <Loading />}
                     </Form.Group>
 
-                    <Quill 
+                    <ReactQuill
+                        theme="snow"
                         value={body}
-                        onChange={(e) => setBody(e.target.value)}
+                        onChange={setBody}
                     />
 
                     <Button type="submit" variant="primary">

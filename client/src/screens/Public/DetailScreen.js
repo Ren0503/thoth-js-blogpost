@@ -5,9 +5,13 @@ import { createStoryComment, detailStory } from 'actions/storyActions';
 import { STORY_CREATE_COMMENT_RESET } from 'constants/storyConstants';
 import { Loading, Message } from 'components/shared';
 import { ListGroup, Row, Col, Form, Image, Button } from 'react-bootstrap';
+import { useSpeechSynthesis } from 'react-speech-kit';
 import MainLayout from 'layouts/MainLayout';
 
+
 const DetailScreen = ({ history, match }) => {
+    const { speak } = useSpeechSynthesis();
+
     const [body, setBody] = useState('');
     const dispatch = useDispatch();
 
@@ -53,6 +57,7 @@ const DetailScreen = ({ history, match }) => {
             ) : (
                 <>
                     <h3 className="text-center p-3">{story.title}</h3>
+                    <button onClick={() => speak({ text: story.body })}>Speak</button>
                     <div className="paper text-justify">
                         <i>{story.description}</i>
                         <div className="text-justify" dangerouslySetInnerHTML={{ __html: story.body }} />
