@@ -183,7 +183,7 @@ export const myStories = () => async (dispatch, getState) => {
             type: types.STORY_LIST_MY_SUCCESS,
             payload: data,
         });
-    } catch (err) {
+    } catch (error) {
         const message =
             error.response && error.response.data.message
                 ? error.response.data.message
@@ -218,7 +218,7 @@ export const createStoryComment = (storyId, comment) => async (dispatch, getStat
         dispatch({
             type: types.STORY_CREATE_COMMENT_SUCCESS
         });
-    } catch (err) {
+    } catch (error) {
         const message =
             error.response && error.response.data.message
                 ? error.response.data.message

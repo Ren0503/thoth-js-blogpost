@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createStoryComment, detailStory } from 'actions/storyActions';
 import { STORY_CREATE_COMMENT_RESET } from 'constants/storyConstants';
 import { Loading, Message } from 'components/shared';
-import { ListGroup, Row, Col, Form } from 'react-bootstrap';
+import { ListGroup, Row, Col, Form, Image, Button } from 'react-bootstrap';
 import MainLayout from 'layouts/MainLayout';
 
-const DetailScreen = () => {
+const DetailScreen = ({ history, match }) => {
     const [body, setBody] = useState('');
     const dispatch = useDispatch();
 

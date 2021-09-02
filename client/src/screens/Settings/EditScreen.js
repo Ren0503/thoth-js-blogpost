@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainLayout from 'layouts/MainLayout';
 import Quill from 'react-quill';
 
-const EditScreen = () => {
+const EditScreen = ({ history, match }) => {
     const storyId = match.params.id;
 
     const [title, setTitle] = useState('');

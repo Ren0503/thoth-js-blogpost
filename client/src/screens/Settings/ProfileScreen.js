@@ -203,7 +203,7 @@ const ProfileScreen = ({ location, history }) => {
                                             <Button
                                                 variant='danger'
                                                 className='btn-sm'
-                                                onClick={() => deleteHandler(product._id)}
+                                                onClick={() => deleteHandler(story._id)}
                                             >
                                                 <i className='fas fa-trash'></i>
                                             </Button>

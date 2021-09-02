@@ -34,7 +34,7 @@ const Header = () => {
                                     <Image src={userInfo.avatar} width="40" height="40" roundedCircle />
                                     <NavDropdown title={userInfo.name} id='username'>
                                         <Link to='/profile'>
-                                            <NavDropdown.Item>Profile</NavDropdown.Item>
+                                            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                                         </Link>
                                         <NavDropdown.Item onClick={logoutHandler}>
                                             Logout
@@ -43,7 +43,7 @@ const Header = () => {
                                 </>
                             ) : (
                                 <Link to='/login'>
-                                    <Nav.Link>
+                                    <Nav.Link href="/login">
                                         <i className='fas fa-user'></i> Sign In
                                     </Nav.Link>
                                 </Link>
