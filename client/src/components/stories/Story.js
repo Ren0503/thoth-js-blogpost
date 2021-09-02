@@ -9,7 +9,7 @@ const Story = ({ story }) => {
                 <Card.Img src={story.image} />
 
                 <Card.Body>
-                    <Link to={`/book/${story._id}`}>
+                    <Link to={`/story/${story._id}`}>
                         <Card.Title as='h5' className="title">
                             <strong>{story.title}</strong>
                         </Card.Title>

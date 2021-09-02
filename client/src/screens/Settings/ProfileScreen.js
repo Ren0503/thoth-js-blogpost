@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getUserDetail, updateUserProfile } from 'actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
-import {  Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Table } from 'react-bootstrap';
 import { Message, Loading } from 'components/shared';
 import { USER_UPDATE_PROFILE_RESET } from 'constants/userConstants';
 import MainLayout from 'layouts/MainLayout';
+import { deleteStory, myStories } from 'actions/storyActions';
+import { Link } from 'react-router-dom';
 
 const ProfileScreen = ({ location, history }) => {
     const [name, setName] = useState('');
@@ -27,6 +29,16 @@ const ProfileScreen = ({ location, history }) => {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile);
     const { success } = userUpdateProfile;
 
+    const storyListMy = useSelector(state => state.storyListMy);
+    const { loading: loadingStories, error: errorStories, stories } = storyListMy;
+
+    const storyDelete = useSelector(state => state.storyDelete);
+    const {
+        loading: loadingDelete,
+        error: errorDelete,
+        success: successDelete,
+    } = storyDelete
+
     useEffect(() => {
         if (!userInfo) {
             history.push('/login');
@@ -34,13 +46,20 @@ const ProfileScreen = ({ location, history }) => {
             if (!user || !user.name || success) {
                 dispatch({ type: USER_UPDATE_PROFILE_RESET });
                 dispatch(getUserDetail('profile'));
+                dispatch(myStories());
             } else {
                 setName(user.name);
                 setEmail(user.email);
                 setAvatar(user.avatar);
             }
         }
-    }, [dispatch, history, userInfo, user, success]);
+    }, [dispatch, history, userInfo, user, success, successDelete]);
+
+    const deleteHandler = (id) => {
+        if (window.confirm('Are you sure')) {
+            dispatch(deleteStory(id));
+        }
+    };
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0];
@@ -59,7 +78,7 @@ const ProfileScreen = ({ location, history }) => {
 
             setAvatar(data.secure_url);
             setUploading(false);
-        } catch(error) {
+        } catch (error) {
             console.error(error);
             setUploading(false);
         }
@@ -152,6 +171,48 @@ const ProfileScreen = ({ location, history }) => {
                     )}
                 </Col>
                 <Col md={9}>
+                    <h2>My Stories</h2>
+                    {loadingDelete && <Loading />}
+                    {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+                    {loadingStories ? (
+                        <Loading />
+                    ) : errorStories ? (
+                        <Message>{errorStories}</Message>
+                    ) : (
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TITLE</th>
+                                    <th>DATE</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {stories.map((story) => (
+                                    <tr key={story._id}>
+                                        <td>{story._id}</td>
+                                        <td>{story.title}</td>
+                                        <td>{story.createdAt.substring(0, 10)}</td>
+                                        <td>
+                                            <Link to={`/story/${story._id}/edit`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className='fas fa-edit'></i>
+                                                </Button>
+                                            </Link>
+                                            <Button
+                                                variant='danger'
+                                                className='btn-sm'
+                                                onClick={() => deleteHandler(product._id)}
+                                            >
+                                                <i className='fas fa-trash'></i>
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    )}
                 </Col>
             </Row>
         </MainLayout>
