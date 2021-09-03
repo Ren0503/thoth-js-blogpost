@@ -176,3 +176,29 @@ exports.createComment = async (req, res) => {
         res.status(500).json({ error: "Something went wrong" });
     }
 };
+
+// @desc    Increment views
+// @route   GET /api/stories/:id
+exports.incrementViews = async (req, res) => {
+    try {
+        const story = await Story.findByIdAndUpdate(req.params.id, {$inc: {"views": 1}}, {new: true}).exec();
+
+        if (!story)
+            return res.status(204).json();
+        return res.json(story);
+    } catch (error) {
+        res.status(500).json({ error: "Something went wrong" });
+    }
+};
+
+// @desc    Get top views posts
+// @route   GET /api/stories/top
+exports.getTopStories = async (req, res) => {
+    try {
+        const stories = await Story.find({}).sort({ views: -1 }).limit(5);
+
+        res.json(stories);
+    } catch (error) {
+        res.status(500).json({ error: "Something went wrong" });
+    }
+};

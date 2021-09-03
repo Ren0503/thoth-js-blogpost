@@ -11,6 +11,7 @@ const MainRoutes = () => {
     return (
         <ScrollToTop>
             <Switch>
+                <Route path='/search/:keyword' component={StoryScreen} exact />
                 <Route path='/story/:id/edit' component={EditScreen} exact />
                 <Route path='/my_stories' component={HomeScreen} exact />
                 <Route path='/story/:id' component={DetailScreen} exact />

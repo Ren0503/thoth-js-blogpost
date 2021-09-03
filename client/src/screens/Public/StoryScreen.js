@@ -6,15 +6,16 @@ import { Loading, Message } from 'components/shared';
 import { Story } from 'components/stories';
 import MainLayout from 'layouts/MainLayout';
 
-const StoryScreen = () => {
+const StoryScreen = ({ match }) => {
+    const keyword = match.params.keyword;
     const dispatch = useDispatch();
 
     const storyList = useSelector(state => state.storyList);
     const { loading, error, stories } = storyList;
 
     useEffect(() => {
-        dispatch(listStories());
-    }, [dispatch]);
+        dispatch(listStories(keyword));
+    }, [dispatch, keyword]);
 
     return (
         <MainLayout>

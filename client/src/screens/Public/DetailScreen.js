@@ -59,71 +59,76 @@ const DetailScreen = ({ history, match }) => {
                 <>
                     <h3 className="text-center p-3">{story.title}</h3>
                     <button onClick={() => speak({ text: story.body })}>Speak</button>
-                    <div className="paper text-justify">
-                        <i>{story.description}</i>
-                        <div className="text-justify" dangerouslySetInnerHTML={{ __html: story.body }} />
-                    </div>
-                    <div>
-                        {story.comments.length === 0 &&
-                            <Message>
-                                No comments
-                            </Message>
-                        }
-                        <ListGroup variant="flush">
-                            {story.comments.map((comment) => (
-                                <ListGroup.Item key={comment._id}>
-                                    <Row>
-                                        <Col md={1}>
-                                            <Image src={comment.avatar} width="50" height="50" roundedCircle />
-                                        </Col>
-                                        <Col md={11}>
-                                            <strong>{comment.name}</strong>
-                                            <p>{comment.createdAt.substring(0, 10)}</p>
-                                            <p>{comment.body}</p>
-                                        </Col>
-                                    </Row>
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
-                    </div>
-                    <div>
-                        <ListGroup>
-                            <h2>Write a comment</h2>
-                            {successStoryComment && (
-                                <Message variant="success">
-                                    Comment submitted successfully
-                                </Message>
-                            )}
-                            {loadingStoryComment && <Loading />}
-                            {errorStoryComment && (
-                                <Message variant='danger'>{errorStoryComment}</Message>
-                            )}
-                            {userInfo ? (
-                                <Form onSubmit={submitHandler}>
-                                    <Form.Group controlId='body'>
-                                        <Form.Label>Body</Form.Label>
-                                        <Form.Control
-                                            as='textarea'
-                                            row='3'
-                                            value={body}
-                                            onChange={(e) => setBody(e.target.value)}
-                                        ></Form.Control>
-                                    </Form.Group>
-                                    <Button
-                                        disabled={loadingStoryComment}
-                                        type='submit'
-                                        variant='primary'
-                                    >
-                                        Submit
-                                    </Button>
-                                </Form>
-                            ) : (
-                                <Message>
-                                    Please<Link to='/login'>sign in</Link> to write a review{' '}
-                                </Message>
-                            )}
-                        </ListGroup>
-                    </div>
+                    <Row>
+                        <Col md={9}>
+                            <div className="paper text-justify">
+                                <i>{story.description}</i>
+                                <Image src={story.image} fluid className="p-3" />
+                                <div className="text-justify" dangerouslySetInnerHTML={{ __html: story.body }} />
+                            </div>
+                            <div>
+                                {story.comments.length === 0 &&
+                                    <Message>
+                                        No comments
+                                    </Message>
+                                }
+                                <ListGroup variant="flush">
+                                    {story.comments.map((comment) => (
+                                        <ListGroup.Item key={comment._id}>
+                                            <Row>
+                                                <Col md={1}>
+                                                    <Image src={comment.avatar} width="50" height="50" roundedCircle />
+                                                </Col>
+                                                <Col md={11}>
+                                                    <strong>{comment.name}</strong>
+                                                    <p>{comment.createdAt.substring(0, 10)}</p>
+                                                    <p>{comment.body}</p>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                            </div>
+                            <div>
+                                <ListGroup>
+                                    <h2>Write a comment</h2>
+                                    {successStoryComment && (
+                                        <Message variant="success">
+                                            Comment submitted successfully
+                                        </Message>
+                                    )}
+                                    {loadingStoryComment && <Loading />}
+                                    {errorStoryComment && (
+                                        <Message variant='danger'>{errorStoryComment}</Message>
+                                    )}
+                                    {userInfo ? (
+                                        <Form onSubmit={submitHandler}>
+                                            <Form.Group controlId='body'>
+                                                <Form.Label>Body</Form.Label>
+                                                <Form.Control
+                                                    as='textarea'
+                                                    row='3'
+                                                    value={body}
+                                                    onChange={(e) => setBody(e.target.value)}
+                                                ></Form.Control>
+                                            </Form.Group>
+                                            <Button
+                                                disabled={loadingStoryComment}
+                                                type='submit'
+                                                variant='primary'
+                                            >
+                                                Submit
+                                            </Button>
+                                        </Form>
+                                    ) : (
+                                        <Message>
+                                            Please<Link to='/login'>sign in</Link> to write a review{' '}
+                                        </Message>
+                                    )}
+                                </ListGroup>
+                            </div>
+                        </Col>
+                    </Row>
                 </>
             )}
         </MainLayout>

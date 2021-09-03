@@ -9,6 +9,7 @@ router
     .post(protect, StoryCtrl.createStory)
 
 router.get('/my_stories', protect, StoryCtrl.getMyStories)
+router.get('/top', StoryCtrl.getTopStories)
 
 router.get('/user/:userId', StoryCtrl.getStoriesByUser)
 
@@ -16,7 +17,7 @@ router.route('/:id/comments').post(protect, StoryCtrl.createComment)
 
 router
     .route('/:id')
-    .get(StoryCtrl.getStoryById)
+    .get(StoryCtrl.getStoryById, StoryCtrl.incrementViews)
     .put(protect, StoryCtrl.updateStory)
     .delete(protect, StoryCtrl.deleteStory)
 

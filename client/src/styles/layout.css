@@ -4,11 +4,22 @@
 }
 
 .btn-dark {
-    color: #fff;
-    background-color: #000;  
+    color: #000;
+    background-color: #fff;
+    margin: 0 5px;
 }
 
 .btn-light {
-    color: #000;
+    color: #fff;
     background: none;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #121117;
+    color: #fff;
+}
+
+.navbar .nav-link {
+    color: #fff !important;
 }

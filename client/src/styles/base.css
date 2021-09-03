@@ -5,6 +5,7 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #282829;
 }
   
 code {
@@ -14,6 +15,7 @@ code {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Courgette', cursive;
+    color: #fff;
 }
 
 ul {
@@ -23,5 +25,15 @@ ul {
 }
 
 .title {
-    color: #000;
+    color: #fff;
+}
+
+label {
+    color: #fff;
+}
+
+.paper {
+    color: #fff;
+    background-color: #0a0a0a;
+    padding: 32px;
 }

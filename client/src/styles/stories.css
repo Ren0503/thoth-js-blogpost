@@ -1,7 +1,15 @@
 .story {
     border: none;
+    background-color: #0a0a0a;
+    color: #fff;
+    border-radius: 15px;
 }
 
-.story:hover img {
-    box-shadow: 0px 0px 3px 2px #000;
+.story img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.story a {
+    color: #fff;
 }

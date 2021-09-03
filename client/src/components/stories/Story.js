@@ -11,18 +11,17 @@ const Story = ({ story }) => {
 
                 <Card.Body>
                     <Link to={`/story/${story._id}`}>
-                        <Card.Title as='h3' className="title">
+                        <Card.Title as='h6' className="title">
                             <strong>{story.title}</strong>
                         </Card.Title>
                     </Link>
 
                     <Row>
                         <Col>
-                            <Image src={story.user.avatar} roundedCircle width="30" />
-                            <p>{story.user.name}</p>
+                            <p>{story.category}</p>
                         </Col>
-                        <Col>
-                            <p className="text-right">{story.createdAt.substring(0, 10)}</p>
+                        <Col className="text-right">
+                            <Image src={story.user.avatar} roundedCircle width="30" />
                         </Col>
                     </Row>
                 </Card.Body>
