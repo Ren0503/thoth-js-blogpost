@@ -36,6 +36,7 @@ const DetailScreen = ({ history, match }) => {
             dispatch(detailStory(match.params.id));
             dispatch({ type: STORY_CREATE_COMMENT_RESET });
         }
+        // eslint-disable-next-line 
     }, [dispatch, match, successStoryComment]);
 
     const submitHandler = (e) => {

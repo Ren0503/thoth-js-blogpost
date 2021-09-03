@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false,
+    },
+    bio: {
+        type: String,
+        default: "",
     }
 }, {
     timestamps: true,

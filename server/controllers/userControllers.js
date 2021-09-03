@@ -77,6 +77,7 @@ exports.getProfile = async (req, res) => {
                 email: user.email,
                 avatar: user.avatar,
                 isAdmin: user.isAdmin,
+                bio: user.bio,
             });
         } else {
             res.status(404);
@@ -97,6 +98,8 @@ exports.updateProfile = async (req, res) => {
             user.name = req.body.name || user.name;
             user.email = req.body.email || user.email;
             user.avatar = req.body.avatar || user.avatar;
+            user.bio = req.body.bio || user.bio;
+
             if (req.body.password) {
                 user.password = req.body.password;
             }
@@ -105,6 +108,7 @@ exports.updateProfile = async (req, res) => {
     
             res.json({
                 _id: updatedUser._id,
+                bio: updatedUser.bio,
                 name: updatedUser.name,
                 email: updatedUser.email,
                 avatar: updatedUser.avatar,

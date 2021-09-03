@@ -108,4 +108,23 @@ export const storyCommentCreateReducer = (state = {}, action) => {
         default:
             return state;
     }
-}
+};
+
+export const storyByUserReducer = (state = { stories: []}, action) => {
+    switch (action.type) {
+        case types.STORY_BY_USER_REQUEST:
+            return { loading: true, stories: [] };
+        case types.STORY_BY_USER_SUCCESS:
+            return {
+                loading: false,
+                stories: action.payload,
+            };
+        case types.STORY_BY_USER_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+};

@@ -99,6 +99,7 @@ const HomeScreen = ({ history, match }) => {
                         <tbody>
                             {stories.map((story) => (
                                 <tr key={story._id}>
+                                    <td>{story._id}</td>
                                     <td>{story.title}</td>
                                     <td>{story.createdAt.substring(0, 10)}</td>
                                     <td>{story.category}</td>

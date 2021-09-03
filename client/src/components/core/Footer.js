@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
     return (
         <div style={{ textAlign: 'center' }}>
-            Comedian ©2021 Created by Ren 0503
+            Feather ©2021 Created by Ren 0503
         </div>
     );
 };

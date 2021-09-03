@@ -232,3 +232,24 @@ export const createStoryComment = (storyId, comment) => async (dispatch, getStat
         });
     }
 };
+
+export const storyByUser = (userId) => async (dispatch) => {
+    try {
+        dispatch({ type: types.STORY_BY_USER_REQUEST });
+
+        const { data } = await axios.get(`/api/stories/user/${userId}`);
+
+        dispatch({
+            type: types.STORY_BY_USER_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: types.STORY_BY_USER_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
+}

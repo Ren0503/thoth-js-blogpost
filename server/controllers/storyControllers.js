@@ -25,8 +25,17 @@ exports.createStory = async (req, res) => {
 // @route   GET /api/stories
 exports.getAllStories = async (req, res) => {
     try {
-        const stories = await Story.find({ status: 'public' })
-            .populate('user')
+        const keyword = req.query.keyword
+        ? {
+            title: {
+                $regex: req.query.keyword,
+                $options: 'i',
+            },
+        }
+        : {};
+
+        const stories = await Story.find({ status: 'public', ...keyword })
+            .populate('user', 'name avatar bio')
             .sort({ createdAt: -1 })
             .lean()
 
@@ -40,7 +49,7 @@ exports.getAllStories = async (req, res) => {
 // @route   GET /api/stories/:id
 exports.getStoryById = async (req, res) => {
     try {
-        const story = await Story.findById(req.params.id).populate('user').lean();
+        const story = await Story.findById(req.params.id).populate('user', 'name avatar bio').lean();
 
         if (!story) {
             res.status(404).json("Story not found");
@@ -118,7 +127,7 @@ exports.getStoriesByUser = async (req, res) => {
             user: req.params.userId,
             status: 'public',
         })
-            .populate('user')
+            .populate('user', 'name avatar bio')
             .lean()
 
         res.json(stories);

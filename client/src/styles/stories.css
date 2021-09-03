@@ -1,0 +1,7 @@
+.story {
+    border: none;
+}
+
+.story:hover img {
+    box-shadow: 0px 0px 3px 2px #000;
+}

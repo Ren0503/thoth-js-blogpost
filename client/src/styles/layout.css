@@ -1,0 +1,14 @@
+/* Button */
+.btn {
+    border-radius: 15px;
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #000;  
+}
+
+.btn-light {
+    color: #000;
+    background: none;
+}

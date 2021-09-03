@@ -35,7 +35,7 @@ const EditScreen = ({ history, match }) => {
     useEffect(() => {
         if (successUpdate) {
             dispatch({ type: STORY_UPDATE_RESET });
-            history.pushState('/story');
+            history.push('/my_stories');
         } else {
             if (!story.title || story._id !== storyId) {
                 dispatch(detailStory(storyId));
