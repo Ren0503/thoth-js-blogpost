@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createStoryComment, detailStory } from 'actions/storyActions';
 import { STORY_CREATE_COMMENT_RESET } from 'constants/storyConstants';
 import { Loading, Message } from 'components/shared';
-import { ListGroup, Row, Col, Form, Image, Button } from 'react-bootstrap';
+import { ListGroup, Row, Col, Form, Image, Button, Breadcrumb } from 'react-bootstrap';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { TopStories } from 'components/stories';
 import MainLayout from 'layouts/MainLayout';
-
 
 const DetailScreen = ({ history, match }) => {
     const { speak } = useSpeechSynthesis();
@@ -36,8 +36,7 @@ const DetailScreen = ({ history, match }) => {
             dispatch(detailStory(match.params.id));
             dispatch({ type: STORY_CREATE_COMMENT_RESET });
         }
-        // eslint-disable-next-line 
-    }, [dispatch, match, successStoryComment]);
+    }, [dispatch, match, successStoryComment, story]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -57,14 +56,28 @@ const DetailScreen = ({ history, match }) => {
                 <Message variant='danger'>{error}</Message>
             ) : (
                 <>
-                    <h3 className="text-center p-3">{story.title}</h3>
-                    <button onClick={() => speak({ text: story.body })}>Speak</button>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href="/">Story</Breadcrumb.Item>
+                        <Breadcrumb.Item active>{story.title}</Breadcrumb.Item>
+                    </Breadcrumb>
+                    <button className="speak" onClick={() => speak({ text: story.body })}>Speak</button>
                     <Row>
                         <Col md={9}>
                             <div className="paper text-justify">
-                                <i>{story.description}</i>
+                                <h3 className="text-center p-3">{story.title}</h3>
+                                <i>"{story.description}"</i>
                                 <Image src={story.image} fluid className="p-3" />
                                 <div className="text-justify" dangerouslySetInnerHTML={{ __html: story.body }} />
+                                <div className="author">
+                                    <Row>
+                                        <Col md={2}>
+                                            <Image className="ml-3" src={story.user.avatar} width="50" alt="Avatar" roundedCircle />
+                                        </Col>
+                                        <Col md={10}>
+                                            <h6>{story.user.name}</h6>
+                                        </Col>
+                                    </Row>
+                                </div>
                             </div>
                             <div>
                                 {story.comments.length === 0 &&
@@ -127,6 +140,9 @@ const DetailScreen = ({ history, match }) => {
                                     )}
                                 </ListGroup>
                             </div>
+                        </Col>
+                        <Col md={3}>
+                            <TopStories />
                         </Col>
                     </Row>
                 </>

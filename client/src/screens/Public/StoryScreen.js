@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listStories } from 'actions/storyActions';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Image, Row } from 'react-bootstrap';
 import { Loading, Message } from 'components/shared';
 import { Story } from 'components/stories';
 import MainLayout from 'layouts/MainLayout';
+import symbol from 'assets/symbol.jpg';
 
 const StoryScreen = ({ match }) => {
     const keyword = match.params.keyword;
@@ -26,6 +27,9 @@ const StoryScreen = ({ match }) => {
             ) : (
                 <>
                     <Row>
+                        <Col sm={12} md={6} lg={3}>
+                            <Image src={symbol} fluid/>
+                        </Col>
                         {stories.map((story) => (
                             <Col key={story._id} sm={12} md={6} lg={3}>
                                 <Story story={story} />

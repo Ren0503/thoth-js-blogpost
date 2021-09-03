@@ -252,4 +252,25 @@ export const storyByUser = (userId) => async (dispatch) => {
                     : error.message,
         });
     }
-}
+};
+
+export const listTopStories = () => async (dispatch) => {
+    try {
+        dispatch({ type: types.STORY_TOP_REQUEST });
+
+        const { data } = await axios.get(`/api/stories/top`);
+
+        dispatch({
+            type: types.STORY_TOP_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: types.STORY_TOP_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
+};

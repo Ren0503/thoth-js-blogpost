@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getUserDetail, updateUserProfile } from 'actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { Message, Loading } from 'components/shared';
 import { USER_UPDATE_PROFILE_RESET } from 'constants/userConstants';
 import MainLayout from 'layouts/MainLayout';
@@ -13,6 +13,7 @@ const ProfileScreen = ({ location, history }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [bio, setBio] = useState('');
     const [message, setMessage] = useState(null);
     const [avatar, setAvatar] = useState('');
     const [uploading, setUploading] = useState(false);
@@ -39,6 +40,7 @@ const ProfileScreen = ({ location, history }) => {
                 setName(user.name);
                 setEmail(user.email);
                 setAvatar(user.avatar);
+                setBio(user.bio);
             }
         }
     }, [dispatch, history, userInfo, user, success]);
@@ -71,7 +73,7 @@ const ProfileScreen = ({ location, history }) => {
         if (password !== confirmPassword) {
             setMessage('Passwords do not match');
         } else {
-            dispatch(updateUserProfile({ id: user._id, name, email, avatar, password }));
+            dispatch(updateUserProfile({ id: user._id, name, email, avatar, password, bio }));
         }
     };
 
@@ -141,6 +143,16 @@ const ProfileScreen = ({ location, history }) => {
                             placeholder='Confirm password'
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
+                        ></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId='bio'>
+                        <Form.Label>Bio</Form.Label>
+                        <Form.Control
+                            as='textarea'
+                            row='3'
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
                         ></Form.Control>
                     </Form.Group>
 

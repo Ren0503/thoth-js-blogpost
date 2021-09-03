@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Image, Row } from 'react-bootstrap';
+import { Badge, Card, Col, Image, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "styles/stories.css";
 
@@ -18,7 +18,7 @@ const Story = ({ story }) => {
 
                     <Row>
                         <Col>
-                            <p>{story.category}</p>
+                            <Badge style={{ background: "#8a2be2" }}>{story.category}</Badge>
                         </Col>
                         <Col className="text-right">
                             <Image src={story.user.avatar} roundedCircle width="30" />

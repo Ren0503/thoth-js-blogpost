@@ -139,8 +139,8 @@ const EditScreen = ({ history, match }) => {
                     <Form.Group controlId='category'>
                         <Form.Label>Description</Form.Label>
                         <Form.Control
-                            type='text'
-                            placeholder='Enter description'
+                            as='textarea'
+                            row='3'
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         ></Form.Control>

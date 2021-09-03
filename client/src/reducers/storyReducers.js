@@ -14,7 +14,7 @@ export const storyListReducer = (state = { stories: [] }, action) => {
 };
 
 export const storyDetailsReducer = (
-    state = { story: { comments: [] } },
+    state = { story: { comments: [], user: {} } },
     action
 ) => {
     switch (action.type) {
@@ -124,6 +124,19 @@ export const storyByUserReducer = (state = { stories: []}, action) => {
                 loading: false,
                 error: action.payload,
             };
+        default:
+            return state;
+    }
+};
+
+export const storyTopReducer = (state= { stories: []}, action) => {
+    switch (action.type) {
+        case types.STORY_TOP_REQUEST:
+            return { loading: true, stories: [] };
+        case types.STORY_TOP_SUCCESS:
+            return { loading: false, stories: action.payload };
+        case types.STORY_TOP_FAIL:
+            return { loading: false, error: action.payload };
         default:
             return state;
     }

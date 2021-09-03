@@ -3,6 +3,7 @@
     background-color: #0a0a0a;
     color: #fff;
     border-radius: 15px;
+    margin: 5px;
 }
 
 .story img {
@@ -12,4 +13,19 @@
 
 .story a {
     color: #fff;
+}
+
+.top-stories {
+    padding: 5px;
+}
+
+.top-stories img {
+    border-radius: 15px;
+}
+
+.author {
+    border: 1px solid #ddd;
+    padding: 15px 0;
+    background-color: #222;
+    border-radius: 15px;
 }
