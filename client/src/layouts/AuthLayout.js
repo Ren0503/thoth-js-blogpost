@@ -1,20 +1,16 @@
 import React from 'react';
 import { Col, Row, Image } from 'react-bootstrap';
 import background from 'assets/background.jpg';
+import "styles/auth.css";
 
 const AuthLayout = ({ children }) => {
     return (
-        <div>
-            <Row>
-                <Col md={6}>
-                    <Image src={background} fluid/>
-                </Col>
-                <Col md={6}>
-                    <div className="p-5">
-                        {children}
-                    </div>
-                </Col>
-            </Row>
+        <div className="auth-overlay">
+            <div className="auth-modal">
+                <div className="auth-form">
+                {children}
+                </div>
+            </div>
         </div>
     )
 }

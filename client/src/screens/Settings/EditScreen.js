@@ -9,6 +9,20 @@ import MainLayout from 'layouts/MainLayout';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
+const categories = [
+    { value: 'Discuss' },
+    { value: 'Science' },
+    { value: 'Sports' },
+    { value: 'Game' },
+    { value: 'Music' },
+    { value: 'Movie' },
+    { value: 'Culture' },
+    { value: 'Book' },
+    { value: 'Travel' },
+    { value: 'Skill' },
+    { value: 'Indite' },
+];
+
 const EditScreen = ({ history, match }) => {
     const storyId = match.params.id;
 
@@ -117,11 +131,14 @@ const EditScreen = ({ history, match }) => {
                     <Form.Group controlId='category'>
                         <Form.Label>Category</Form.Label>
                         <Form.Control
-                            type='text'
-                            placeholder='Enter category'
+                            as='select'
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                        ></Form.Control>
+                        >
+                            {categories.map((categoryType, index) => (
+                                <option key={index} value={categoryType.value}>{categoryType.value}</option>
+                            ))}
+                        </Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId='status'>

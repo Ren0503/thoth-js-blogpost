@@ -87,6 +87,27 @@ export const getUserDetail = (id) => async (dispatch, getState) => {
     try {
         dispatch({ type: types.USER_DETAILS_REQUEST });
 
+        const { data } = await axios.get(`/api/users/${id}`);
+
+        dispatch({
+            type: types.USER_DETAILS_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: types.USER_DETAILS_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    };
+};
+
+export const getUserProfile = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: types.USER_PROFILE_REQUEST });
+        
         const {
             userLogin: { userInfo },
         } = getState();
@@ -97,10 +118,10 @@ export const getUserDetail = (id) => async (dispatch, getState) => {
             }
         };
 
-        const { data } = await axios.get(`/api/users/${id}`, config);
+        const { data } = await axios.get(`/api/users/profile`, config);
 
         dispatch({
-            type: types.USER_DETAILS_SUCCESS,
+            type: types.USER_PROFILE_SUCCESS,
             payload: data,
         });
     } catch (error) {
@@ -112,7 +133,7 @@ export const getUserDetail = (id) => async (dispatch, getState) => {
             dispatch(logout());
         };
         dispatch({
-            type: types.USER_DETAILS_FAIL,
+            type: types.USER_PROFILE_FAIL,
             payload: message,
         });
     };

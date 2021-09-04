@@ -17,7 +17,7 @@ router
 
 router
     .route('/:id')
-    .get(protect, admin, UserCtrl.getUserById)
+    .get(UserCtrl.getUserById)
     .put(protect, admin, UserCtrl.updatedUser)
     .delete(protect, admin, UserCtrl.deleteUser)
 

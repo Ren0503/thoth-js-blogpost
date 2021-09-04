@@ -21,7 +21,9 @@ const Story = ({ story }) => {
                             <Badge style={{ background: "#8a2be2" }}>{story.category}</Badge>
                         </Col>
                         <Col className="text-right">
-                            <Image src={story.user.avatar} roundedCircle width="30" />
+                            <Link to={`/user/${story.user._id}`}>
+                                <Image src={story.user.avatar} roundedCircle width="30" />
+                            </Link>
                         </Col>
                     </Row>
                 </Card.Body>

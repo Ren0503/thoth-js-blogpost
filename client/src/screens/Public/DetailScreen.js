@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createStoryComment, detailStory } from 'actions/storyActions';
 import { STORY_CREATE_COMMENT_RESET } from 'constants/storyConstants';
 import { Loading, Message } from 'components/shared';
-import { ListGroup, Row, Col, Form, Image, Button, Breadcrumb } from 'react-bootstrap';
+import { ListGroup, Row, Col, Form, Image, Button, Breadcrumb, Badge } from 'react-bootstrap';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { TopStories } from 'components/stories';
 import MainLayout from 'layouts/MainLayout';
@@ -67,17 +67,26 @@ const DetailScreen = ({ history, match }) => {
                                 <h3 className="text-center p-3">{story.title}</h3>
                                 <i>"{story.description}"</i>
                                 <Image src={story.image} fluid className="p-3" />
-                                <div className="text-justify" dangerouslySetInnerHTML={{ __html: story.body }} />
-                                <div className="author">
-                                    <Row>
-                                        <Col md={2}>
-                                            <Image className="ml-3" src={story.user.avatar} width="50" alt="Avatar" roundedCircle />
-                                        </Col>
-                                        <Col md={10}>
-                                            <h6>{story.user.name}</h6>
-                                        </Col>
-                                    </Row>
-                                </div>
+                                <div className="text-justify paper-body" dangerouslySetInnerHTML={{ __html: story.body }} />
+                                <Row>
+                                    <Col md={6}>
+                                        <Badge style={{ background: "#8a2be2" }}>{story.category}</Badge>
+                                    </Col>
+                                    <Col className="text-right" md={6}>
+                                        <i>{story.createdAt}</i>
+                                    </Col>
+                                </Row>
+                            </div>
+                            <div className="author">
+                                <Row>
+                                    <Col md={1}>
+                                        <Image className="ml-3" src={story.user.avatar} width="50" alt="Avatar" roundedCircle />
+                                    </Col>
+                                    <Col md={11}>
+                                        <h6 className="ml-3">{story.user.name}</h6>
+                                        <p>{story.user.bio}</p>
+                                    </Col>
+                                </Row>
                             </div>
                             <div>
                                 {story.comments.length === 0 &&
@@ -85,9 +94,9 @@ const DetailScreen = ({ history, match }) => {
                                         No comments
                                     </Message>
                                 }
-                                <ListGroup variant="flush">
+                                <ListGroup variant="flush" className="comment">
                                     {story.comments.map((comment) => (
-                                        <ListGroup.Item key={comment._id}>
+                                        <ListGroup.Item key={comment._id} style={{ background: "#0a0a0a"}}>
                                             <Row>
                                                 <Col md={1}>
                                                     <Image src={comment.avatar} width="50" height="50" roundedCircle />

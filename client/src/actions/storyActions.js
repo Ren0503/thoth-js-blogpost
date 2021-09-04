@@ -2,12 +2,12 @@ import axios from 'axios';
 import { logout } from './userActions';
 import * as types from 'constants/storyConstants';
 
-export const listStories = (keyword= '') => async (dispatch) => {
+export const listStories = (keyword= '', category= '') => async (dispatch) => {
     try {
         dispatch({ type: types.STORY_LIST_REQUEST });
 
         const { data } = await axios.get(
-            `/api/stories?keyword=${keyword}`
+            `/api/stories?keyword=${keyword}&category=${category}`
         );
 
         dispatch({
@@ -233,7 +233,7 @@ export const createStoryComment = (storyId, comment) => async (dispatch, getStat
     }
 };
 
-export const storyByUser = (userId) => async (dispatch) => {
+export const listStoryByUser = (userId) => async (dispatch) => {
     try {
         dispatch({ type: types.STORY_BY_USER_REQUEST });
 

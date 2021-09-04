@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getUserDetail, updateUserProfile } from 'actions/userActions';
+import { getUserProfile, updateUserProfile } from 'actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { Message, Loading } from 'components/shared';
@@ -20,8 +20,8 @@ const ProfileScreen = ({ location, history }) => {
 
     const dispatch = useDispatch();
 
-    const userDetail = useSelector(state => state.userDetail);
-    const { loading, error, user } = userDetail;
+    const userProfile = useSelector(state => state.userProfile);
+    const { loading, error, user } = userProfile;
 
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
@@ -35,7 +35,7 @@ const ProfileScreen = ({ location, history }) => {
         } else {
             if (!user || !user.name || success) {
                 dispatch({ type: USER_UPDATE_PROFILE_RESET });
-                dispatch(getUserDetail('profile'));
+                dispatch(getUserProfile());
             } else {
                 setName(user.name);
                 setEmail(user.email);

@@ -26,15 +26,24 @@ exports.createStory = async (req, res) => {
 exports.getAllStories = async (req, res) => {
     try {
         const keyword = req.query.keyword
-        ? {
-            title: {
-                $regex: req.query.keyword,
-                $options: 'i',
-            },
-        }
-        : {};
+            ? {
+                title: {
+                    $regex: req.query.keyword,
+                    $options: 'i',
+                },
+            }
+            : {};
 
-        const stories = await Story.find({ status: 'public', ...keyword })
+        const category = req.query.category
+            ? {
+                category: {
+                    $regex: req.query.category,
+                    $options: 'i',
+                },
+            }
+            : {};
+
+        const stories = await Story.find({ status: 'public', ...keyword, ...category })
             .populate('user', 'name avatar bio')
             .sort({ createdAt: -1 })
             .lean()
@@ -54,7 +63,7 @@ exports.getStoryById = async (req, res) => {
         if (!story) {
             res.status(404).json("Story not found");
         }
-            
+
         res.json(story);
     } catch (error) {
         res.status(500).json({ error: "Something went wrong" });
@@ -177,25 +186,11 @@ exports.createComment = async (req, res) => {
     }
 };
 
-// @desc    Increment views
-// @route   GET /api/stories/:id
-exports.incrementViews = async (req, res) => {
-    try {
-        const story = await Story.findByIdAndUpdate(req.params.id, {$inc: {"views": 1}}, {new: true}).exec();
-
-        if (!story)
-            return res.status(204).json();
-        return res.json(story);
-    } catch (error) {
-        res.status(500).json({ error: "Something went wrong" });
-    }
-};
-
 // @desc    Get top views posts
 // @route   GET /api/stories/top
 exports.getTopStories = async (req, res) => {
     try {
-        const stories = await Story.find({}).sort({ views: -1 }).limit(5);
+        const stories = await Story.find({}).sort({ numComments: -1 }).limit(5);
 
         res.json(stories);
     } catch (error) {

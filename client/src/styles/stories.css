@@ -26,6 +26,13 @@
 .author {
     border: 1px solid #ddd;
     padding: 15px 0;
-    background-color: #222;
+    background-color: #292c3b;
     border-radius: 15px;
+    margin: 15px 0;
+}
+
+.comment {
+    border-radius: 15px;
+    margin: 15px auto;
+    color: #fff;
 }

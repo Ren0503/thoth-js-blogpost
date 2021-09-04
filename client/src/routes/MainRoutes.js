@@ -6,6 +6,7 @@ import DetailScreen from 'screens/Public/DetailScreen';
 import StoryScreen from 'screens/Public/StoryScreen';
 import EditScreen from 'screens/Settings/EditScreen';
 import HomeScreen from 'screens/Settings/HomeScreen';
+import UserScreen from 'screens/Public/UserScreen';
 
 const MainRoutes = () => {
     return (
@@ -16,6 +17,7 @@ const MainRoutes = () => {
                 <Route path='/my_stories' component={HomeScreen} exact />
                 <Route path='/story/:id' component={DetailScreen} exact />
                 <Route path='/profile' component={ProfileScreen} exact />
+                <Route path='/user/:id' component={UserScreen} exact />
                 <Route path="/" component={StoryScreen} exact />
             </Switch>
         </ScrollToTop>

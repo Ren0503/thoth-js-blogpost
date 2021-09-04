@@ -17,7 +17,7 @@ router.route('/:id/comments').post(protect, StoryCtrl.createComment)
 
 router
     .route('/:id')
-    .get(StoryCtrl.getStoryById, StoryCtrl.incrementViews)
+    .get(StoryCtrl.getStoryById)
     .put(protect, StoryCtrl.updateStory)
     .delete(protect, StoryCtrl.deleteStory)
 

@@ -1,0 +1,40 @@
+.auth-overlay {
+    background-image: url("assets/auth.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.auth-modal {
+    margin: 0 auto;
+    padding: 6rem;
+}
+
+.auth-form {
+    width: 400px;
+    margin: auto;
+    background-color: #000000bd;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+@media screen and (max-width: 580px) {
+    .auth-modal {
+        padding: 2rem;
+    }
+    .auth-form {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .auth-modal {
+        padding: 15px;
+    }
+    .auth-form {
+        width: 250px;
+    }
+    .auth-form h1 {
+        font-size: 30px;
+    }
+}

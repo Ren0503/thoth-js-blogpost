@@ -8,7 +8,7 @@ import {
 import { STORY_CREATE_RESET } from 'constants/storyConstants';
 import MainLayout from 'layouts/MainLayout';
 import { Loading, Message } from 'components/shared';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 
 const HomeScreen = ({ history, match }) => {
@@ -104,11 +104,11 @@ const HomeScreen = ({ history, match }) => {
                                     <td>{story.createdAt.substring(0, 10)}</td>
                                     <td>{story.category}</td>
                                     <td>
-                                        <LinkContainer to={`/story/${story._id}/edit`}>
+                                        <Link to={`/story/${story._id}/edit`}>
                                             <Button variant='light' className='btn-sm'>
                                                 <i className='fas fa-edit'></i>
                                             </Button>
-                                        </LinkContainer>
+                                        </Link>
                                         <Button
                                             variant='danger'
                                             className='btn-sm'
