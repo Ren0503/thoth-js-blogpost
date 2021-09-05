@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Card, Col, Image, Row } from 'react-bootstrap';
+import { Card, Col, Image, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "styles/stories.css";
 
@@ -17,8 +17,9 @@ const Story = ({ story }) => {
                     </Link>
 
                     <Row>
-                        <Col>
-                            <Badge style={{ background: "#8a2be2" }}>{story.category}</Badge>
+                        <Col style={{ color: '#aaa' }}>
+                            <i className="fas fa-eye"></i> {story.views} {" "}
+                            <i className="fas fa-comment"></i> {story.numComments}
                         </Col>
                         <Col className="text-right">
                             <Link to={`/user/${story.user._id}`}>

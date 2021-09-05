@@ -8,6 +8,7 @@ import { ListGroup, Row, Col, Form, Image, Button, Breadcrumb, Badge } from 'rea
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { TopStories } from 'components/stories';
 import MainLayout from 'layouts/MainLayout';
+import moment from 'moment';
 
 const DetailScreen = ({ history, match }) => {
     const { speak } = useSpeechSynthesis();
@@ -57,10 +58,11 @@ const DetailScreen = ({ history, match }) => {
             ) : (
                 <>
                     <Breadcrumb>
-                        <Breadcrumb.Item href="/">Story</Breadcrumb.Item>
+                        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                        <Breadcrumb.Item href="/category">{story.category}</Breadcrumb.Item>
                         <Breadcrumb.Item active>{story.title}</Breadcrumb.Item>
                     </Breadcrumb>
-                    <button className="speak" onClick={() => speak({ text: story.body })}>Speak</button>
+                    <button className="speak" onClick={() => speak({ text: story.body })}><i className="fas fa-play"></i></button>
                     <Row>
                         <Col md={9}>
                             <div className="paper text-justify">
@@ -73,7 +75,7 @@ const DetailScreen = ({ history, match }) => {
                                         <Badge style={{ background: "#8a2be2" }}>{story.category}</Badge>
                                     </Col>
                                     <Col className="text-right" md={6}>
-                                        <i>{story.createdAt}</i>
+                                        <i>{moment(story.createdAt).calendar()}</i>
                                     </Col>
                                 </Row>
                             </div>
@@ -96,14 +98,14 @@ const DetailScreen = ({ history, match }) => {
                                 }
                                 <ListGroup variant="flush" className="comment">
                                     {story.comments.map((comment) => (
-                                        <ListGroup.Item key={comment._id} style={{ background: "#0a0a0a"}}>
+                                        <ListGroup.Item key={comment._id} style={{ background: "#0a0a0a" }}>
                                             <Row>
                                                 <Col md={1}>
                                                     <Image src={comment.avatar} width="50" height="50" roundedCircle />
                                                 </Col>
                                                 <Col md={11}>
                                                     <strong>{comment.name}</strong>
-                                                    <p>{comment.createdAt.substring(0, 10)}</p>
+                                                    <p>{moment(comment.createdAt).calendar()}</p>
                                                     <p>{comment.body}</p>
                                                 </Col>
                                             </Row>

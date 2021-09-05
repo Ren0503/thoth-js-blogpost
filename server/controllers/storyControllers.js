@@ -58,7 +58,11 @@ exports.getAllStories = async (req, res) => {
 // @route   GET /api/stories/:id
 exports.getStoryById = async (req, res) => {
     try {
-        const story = await Story.findById(req.params.id).populate('user', 'name avatar bio').lean();
+        const story = await Story.findByIdAndUpdate(
+            req.params.id,
+            { $inc: { views: 1 } },
+            { new: true }
+        ).populate('user', 'name avatar bio');
 
         if (!story) {
             res.status(404).json("Story not found");
@@ -190,7 +194,7 @@ exports.createComment = async (req, res) => {
 // @route   GET /api/stories/top
 exports.getTopStories = async (req, res) => {
     try {
-        const stories = await Story.find({}).sort({ numComments: -1 }).limit(5);
+        const stories = await Story.find({}).sort({ views: -1 }).limit(5);
 
         res.json(stories);
     } catch (error) {

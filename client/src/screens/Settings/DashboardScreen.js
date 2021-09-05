@@ -11,7 +11,7 @@ import { Loading, Message } from 'components/shared';
 import { Link } from 'react-router-dom';
 import { Row, Col, Button, Table } from 'react-bootstrap';
 
-const HomeScreen = ({ history, match }) => {
+const DashboardScreen = ({ history, match }) => {
     const dispatch = useDispatch();
 
     const storyListMy = useSelector(state => state.storyListMy);
@@ -127,4 +127,4 @@ const HomeScreen = ({ history, match }) => {
     );
 };
 
-export default HomeScreen;
+export default DashboardScreen;

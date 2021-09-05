@@ -13,16 +13,16 @@ const Search = ({ history }) => {
         }
     }
     return (
-        <Form onSubmit={submitHandler} inline>
+        <Form className="search" onSubmit={submitHandler} inline>
             <Form.Control
                 type='text'
                 name='q'
                 onChange={(e) => setKeyword(e.target.value)}
-                placeholder='Search Products...'
+                placeholder='Search story...'
                 className='mr-sm-2 ml-sm-5'
             ></Form.Control>
-            <Button type='submit' variant='outline-success' className='p-2'>
-                Search
+            <Button type='submit' variant='outline-primary' className='p-2'>
+                <i className="fas fa-search"></i>
             </Button>
         </Form>
     )

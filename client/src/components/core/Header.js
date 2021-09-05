@@ -4,7 +4,6 @@ import { logout } from 'actions/userActions';
 import logo from 'assets/logo.png';
 import { Container, Image, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
 import { Link, Route } from 'react-router-dom';
-import Search from './Search';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -26,9 +25,8 @@ const Header = () => {
                 </Link>
                 <Navbar.Toggle aria-controls='navbarScroll' />
                 <Navbar.Collapse id='navbarScroll'>
-                    <Route render={({ history }) => <Search history={history} />} />
                     <Nav className='ml-auto' navbarScroll>
-                        <Nav.Link href="/g">Generate</Nav.Link>
+                        <Nav.Link href="/category">Category</Nav.Link>
                         <Nav.Link href="/story">Discover</Nav.Link>
                         {userInfo ? (
                             <>
