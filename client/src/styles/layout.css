@@ -14,6 +14,12 @@
     background: none;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #f43547;
+    border: none;
+}
+
 /* Navbar */
 .navbar {
     background-color: #121117;
@@ -67,10 +73,37 @@
 }
 
 .search input {
-    width: 85% !important;
+    width: 80% !important;
 }
 
 .search button {
     border-radius: 50%;
     padding: 6px 10px !important;
+}
+@media screen and (max-width: 768px) {
+    .home {
+        padding: 2rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .home {
+        padding: 1rem;
+    }
+    .search {
+        padding: 3rem 1rem;
+    }
+    .search input {
+        font-size: 10px;
+    }
+    .search button {
+        font-size: 10px;
+        padding: 5px 8px !important;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .home {
+        padding: 0;
+    }
 }

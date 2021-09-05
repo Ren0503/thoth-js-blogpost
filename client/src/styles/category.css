@@ -63,7 +63,7 @@
     transform: scale(1.055);
 }
 .honeycomb-cell::after {
-    background: #3ea0eb;
+    background: #000;
     opacity: 0.5;
     transition: opacity 350ms;
 }
@@ -71,7 +71,7 @@
     opacity: 0;
 }
 .honeycomb-cell:hover::before {
-    background: #72f88e;
+    background: #f43547;
 }
 .honeycomb-cell:hover::after {
     opacity: 0;

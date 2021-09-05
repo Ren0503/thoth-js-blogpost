@@ -1,6 +1,4 @@
 import React from 'react';
-import { Col, Row, Image } from 'react-bootstrap';
-import background from 'assets/background.jpg';
 import "styles/auth.css";
 
 const AuthLayout = ({ children }) => {

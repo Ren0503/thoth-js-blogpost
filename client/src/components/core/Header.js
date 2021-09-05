@@ -1,9 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'actions/userActions';
-import logo from 'assets/logo.png';
-import { Container, Image, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
-import { Link, Route } from 'react-router-dom';
+import { 
+    Container, 
+    Image, 
+    Nav, 
+    Navbar, 
+    NavDropdown, 
+    Button 
+} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import logo from 'assets/header.png';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -20,14 +27,18 @@ const Header = () => {
             <Container>
                 <Link to='/'>
                     <Navbar.Brand>
-                        <Image src={logo} alt="Logo" width="50" className="avatar" />
+                        <Image src={logo} alt="Logo" width="150" className="Logo" />
                     </Navbar.Brand>
                 </Link>
-                <Navbar.Toggle aria-controls='navbarScroll' />
+                <Navbar.Toggle aria-controls='navbarScroll' style={{ backgroundColor: '#fff' }} />
                 <Navbar.Collapse id='navbarScroll'>
                     <Nav className='ml-auto' navbarScroll>
-                        <Nav.Link href="/category">Category</Nav.Link>
-                        <Nav.Link href="/story">Discover</Nav.Link>
+                        <Nav.Link href="/category">All</Nav.Link>
+                        <Nav.Link href="/category/discuss">Discuss</Nav.Link>
+                        <Nav.Link href="/category/science">Science</Nav.Link>
+                        <Nav.Link href="/category/culture">Culture</Nav.Link>
+                        <Nav.Link href="/category/sharing">Sharing</Nav.Link>
+                        <Nav.Link href="/category/indite">Indite</Nav.Link>
                         {userInfo ? (
                             <>
                                 <Image src={userInfo.avatar} width="40" height="40" roundedCircle />

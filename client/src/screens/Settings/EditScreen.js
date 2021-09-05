@@ -13,13 +13,13 @@ const categories = [
     { value: 'Discuss' },
     { value: 'Science' },
     { value: 'Sports' },
-    { value: 'Game' },
+    { value: 'Business' },
     { value: 'Music' },
     { value: 'Movie' },
     { value: 'Culture' },
     { value: 'Book' },
     { value: 'Travel' },
-    { value: 'Skill' },
+    { value: 'Sharing' },
     { value: 'Indite' },
 ];
 

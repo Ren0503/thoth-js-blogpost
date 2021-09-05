@@ -36,3 +36,44 @@
     margin: 15px auto;
     color: #fff;
 }
+
+.voice {
+    background-color: #292c3b;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.voice select {
+    margin: 0 5px;
+    outline: none;
+    border-color: #fff;
+    background: none;
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px 5px;
+}
+
+.voice select option {
+    color: #000;
+}
+
+.voice .btn-play {
+    outline: none;
+    border-radius: 50%;
+    padding: 5px 8px;
+    margin: 0 5px;
+    background-color: #28a745;
+    border-color: #fff;
+    color: #fff;
+}
+
+
+.voice .btn-cancel {
+    outline: none;
+    border-radius: 50%;
+    padding: 5px 8px;
+    margin: 0 5px;
+    background-color: #f43547;
+    border-color: #fff;
+    color: #fff;
+}

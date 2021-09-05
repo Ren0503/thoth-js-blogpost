@@ -11,9 +11,12 @@ import MainLayout from 'layouts/MainLayout';
 import moment from 'moment';
 
 const DetailScreen = ({ history, match }) => {
-    const { speak } = useSpeechSynthesis();
+    const { speak, cancel, voices } = useSpeechSynthesis();
 
     const [body, setBody] = useState('');
+    const [voiceIndex, setVoiceIndex] = useState(null);
+
+    const voice = voices[voiceIndex] || null;
     const dispatch = useDispatch();
 
     const storyDetail = useSelector(state => state.storyDetail);
@@ -62,9 +65,27 @@ const DetailScreen = ({ history, match }) => {
                         <Breadcrumb.Item href="/category">{story.category}</Breadcrumb.Item>
                         <Breadcrumb.Item active>{story.title}</Breadcrumb.Item>
                     </Breadcrumb>
-                    <button className="speak" onClick={() => speak({ text: story.body })}><i className="fas fa-play"></i></button>
                     <Row>
                         <Col md={9}>
+                            <div className="voice">
+                                <select
+                                    id="voice"
+                                    name="voice"
+                                    value={voiceIndex || ''}
+                                    onChange={(event) => {
+                                        setVoiceIndex(event.target.value);
+                                    }}
+                                >
+                                    <option value="">Voice</option>
+                                    {voices.map((option, index) => (
+                                        <option key={option.voiceURI} value={index}>
+                                            {`${option.lang} - ${option.name}`}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button className="btn-play" onClick={() => speak({ text: story.body, voice })}><i className="fas fa-volume-up"></i></button>
+                                <button className="btn-cancel" onClick={() => cancel({ text: story.body })}><i className="fas fa-window-close"></i></button>
+                            </div>
                             <div className="paper text-justify">
                                 <h3 className="text-center p-3">{story.title}</h3>
                                 <i>"{story.description}"</i>
@@ -82,10 +103,10 @@ const DetailScreen = ({ history, match }) => {
                             <div className="author">
                                 <Row>
                                     <Col md={1}>
-                                        <Image className="ml-3" src={story.user.avatar} width="50" alt="Avatar" roundedCircle />
+                                        <Image className="ml-1" src={story.user.avatar} width="50" alt="Avatar" roundedCircle />
                                     </Col>
                                     <Col md={11}>
-                                        <h6 className="ml-3">{story.user.name}</h6>
+                                        <h6>{story.user.name}</h6>
                                         <p>{story.user.bio}</p>
                                     </Col>
                                 </Row>

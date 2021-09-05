@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MainLayout from 'layouts/MainLayout';
 import book from 'assets/categories/book.jpg';
 import business from 'assets/categories/business.jpg';
@@ -10,61 +11,84 @@ import science from 'assets/categories/science.jpg';
 import sharing from 'assets/categories/sharing.jpg';
 import sports from 'assets/categories/sports.jpg';
 import travel from 'assets/categories/travel.jpg';
+import indite from 'assets/categories/indite.jpg';
 import "styles/category.css";
 
 const CategoryScreen = () => {
     return (
         <MainLayout>
-            <h3 className="text-center py-3">THE VISION LAND </h3>
+            <h3 className="text-center py-3">THE CATEGORIES ARTICLE </h3>
             <ul className="honeycomb" lang="en">
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={discuss} />
-                    <div className="honeycomb-cell__title">Discuss - Debate</div>
+                    <Link to={`/category/discuss`}>
+                        <div className="honeycomb-cell__title">Discuss - Debate</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={science} />
-                    <div className="honeycomb-cell__title">Science</div>
+                    <Link to={`/category/science`}>
+                        <div className="honeycomb-cell__title">Science</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={culture} />
+                    <Link to={`/category/culture`}>
                     <div className="honeycomb-cell__title">Society - Culture</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={music} />
+                    <Link to={`/category/music`}>
                     <div className="honeycomb-cell__title">Music</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={travel} />
+                    <Link to={`/category/travel`}>
                     <div className="honeycomb-cell__title">Travel World</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={sports} />
+                    <Link to={`/category/sports`}>
                     <div className="honeycomb-cell__title">Sports</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={movie} />
+                    <Link to={`/category/movie`}>
                     <div className="honeycomb-cell__title">Movie - Films</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={book} />
+                    <Link to={`/category/book`}>
                     <div className="honeycomb-cell__title">Book</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={business} />
+                    <Link to={`/category/business`}>
                     <div className="honeycomb-cell__title">Business</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
                     <img className="honeycomb-cell__image" src={sharing} />
+                    <Link to={`/category/sharing`}>
                     <div className="honeycomb-cell__title">Sharing- Tell</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell">
-                    <img className="honeycomb-cell__image" src={discuss} />
-                    <div className="honeycomb-cell__title">Discuss - Debate</div>
+                    <img className="honeycomb-cell__image" src={indite} />
+                    <Link to={`/category/indite`}>
+                        <div className="honeycomb-cell__title">Indite</div>
+                    </Link>
                 </li>
                 <li className="honeycomb-cell honeycomb__placeholder" />
             </ul>
 
-            <div className="mt-5">See More</div>
+            <div className="mt-5"></div>
         </MainLayout>
     );
 };
