@@ -57,12 +57,12 @@ const Header = () => {
                         ) : (
                             <>
                                 <Nav.Link href="/login" style={{ padding: 0, margin: 0 }}>
-                                    <Button className="btn btn-light">
+                                    <Button className="btn-light">
                                         Login
                                     </Button>
                                 </Nav.Link>
                                 <Nav.Link href="/login" style={{ padding: 0, margin: 0 }}>
-                                    <Button className="btn btn-dark">
+                                    <Button className="btn-dark">
                                         Register
                                     </Button>
                                 </Nav.Link>

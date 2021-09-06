@@ -186,7 +186,7 @@ const EditScreen = ({ history, match }) => {
                         onChange={setBody}
                     />
 
-                    <Button type="submit" variant="primary">
+                    <Button type="submit" className="btn-red">
                         Update
                     </Button>
                 </Form>

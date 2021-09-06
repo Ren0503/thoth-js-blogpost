@@ -156,7 +156,7 @@ const ProfileScreen = ({ location, history }) => {
                         ></Form.Control>
                     </Form.Group>
 
-                    <Button type='submit' variant='primary'>
+                    <Button type='submit' className='btn-red'>
                         Update
                     </Button>
                 </Form>

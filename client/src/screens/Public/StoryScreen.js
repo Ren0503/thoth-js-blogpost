@@ -55,7 +55,7 @@ const StoryScreen = ({ match }) => {
                         ))}
                         {stories.length > 8 &&
                             <div style={{ margin: 'auto' }}>
-                                <Button className='btn btn-primary' onClick={handleShowMore}>
+                                <Button className='btn btn-red' onClick={handleShowMore}>
                                     <i className="fas fa-angle-down"></i>
                                 </Button>
                             </div>

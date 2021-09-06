@@ -136,7 +136,7 @@ const DetailScreen = ({ history, match }) => {
                                             <Button
                                                 disabled={loadingStoryComment}
                                                 type='submit'
-                                                variant='primary'
+                                                className='btn-red'
                                             >
                                                 Submit
                                             </Button>

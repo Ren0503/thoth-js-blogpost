@@ -32,7 +32,7 @@ const MainLayout = ({ children }) => {
             </Container>
             <div className="scroll-to-top">
                 {visible &&
-                    <Button className='btn btn-dark' onClick={scrollToTop}>
+                    <Button className='btn-dark' onClick={scrollToTop}>
                         <i className="fas fa-angle-up"></i>
                     </Button>
                 }
