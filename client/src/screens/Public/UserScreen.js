@@ -39,10 +39,10 @@ const UserScreen = ({ match }) => {
                     </Breadcrumb>
                     <div className="author">
                         <Row>
-                            <Col md={1}>
+                            <Col sm={2} md={1}>
                                 <Image className="ml-3" src={user.avatar} width="70" alt="Avatar" roundedCircle />
                             </Col>
-                            <Col md={11}>
+                            <Col sm={10} md={11}>
                                 <h5>{user.name}</h5>
                                 <p>{user.bio}</p>
                             </Col>
